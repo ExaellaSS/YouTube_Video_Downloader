@@ -26,18 +26,17 @@ This is a simple YouTube video downloader built with Python and Tkinter. The pro
    Open a terminal or command prompt and run:
    ```sh
    pip install yt-dlp
-   ```
 
 3. **Install FFmpeg**:
    Download and install FFmpeg from [ffmpeg.org](https://ffmpeg.org/download.html). Make sure FFmpeg is added to your system's PATH.
+```
 
 ## Usage
-
+```
 1. **Run the Program**:
    Save the Python script in a file, e.g., `youtube_downloader.py`. Open a terminal or command prompt, navigate to the directory where you saved the script, and run:
    ```sh
    python youtube_downloader.py
-   ```
 
 2. **Enter the YouTube URL**:
    - Copy the URL of the YouTube video you want to download.
@@ -50,9 +49,9 @@ This is a simple YouTube video downloader built with Python and Tkinter. The pro
 
 4. **Exit the Program**:
    - Click the "Exit" button to close the program. Any temporary files created during the download process will be deleted.
-
+```
 ## Notes
-
+```
 - Ensure that you have a stable internet connection while using the program.
 - If you encounter any issues, make sure that yt-dlp and FFmpeg are correctly installed and accessible from your terminal or command prompt.
 
