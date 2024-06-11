@@ -14,7 +14,7 @@ YouTube Video Downloader is a simple desktop application that allows you to down
 
 ### Pre-built Executable
 
-You can download the pre-built executable from [here](https://github.com/ExaellaSS/YouTube_Video_Downloader/releases/download/YTVD-1.0/youtube_downloader.exe).
+You can download the pre-built executable from [here](https://github.com/ExaellaSS/YouTube_Video_Downloader/releases/download/YTVD-1.0/YouTube_Video_Downloader.exe).
 ### How to Use the Application
 
 1. Open the application.
