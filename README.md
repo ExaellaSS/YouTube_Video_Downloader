@@ -10,99 +10,13 @@ YouTube Video Downloader is a simple desktop application that allows you to down
 - Combine video and audio into a single file
 - Easy-to-use graphical interface
 
-## Requirements
-
-- Python 3.6+
-- yt-dlp
-- ffmpeg
-
-## Installation
-
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/ExaellaSS/YouTube_Video_Downloader.git
-    cd youtube-video-downloader
-    ```
-
-2. Install the required Python packages:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3. Download and install [ffmpeg](https://ffmpeg.org/download.html), and make sure `ffmpeg` is in your system PATH.
-
 ## Usage
-
-### Running the Application
-
-To run the application, use the following command:
-
-```bash
-python youtube_downloader.py
-```
-
-### Creating an Executable
-
-If you prefer to distribute the application as an executable file, follow these steps:
-
-1. Make sure you have [PyInstaller](https://www.pyinstaller.org/) installed:
-    ```bash
-    pip install pyinstaller
-    ```
-
-2. Place the `ffmpeg` executable in `ffmpeg/bin/ffmpeg.exe` and your icon file in `resources/icon.ico`.
-
-3. Create custom `youtube_downloader.spec`. Example:
-   ```python
-    # -*- mode: python ; coding: utf-8 -*-
-    a = Analysis(
-        ['youtube_downloader.py'],
-        pathex=[],
-        binaries=[('ffmpeg/bin/ffmpeg.exe', '.')],
-        datas=[('resources/icon.ico', 'resources')],
-        hiddenimports=[],
-        hookspath=[],
-        hooksconfig={},
-        runtime_hooks=[],
-        excludes=[],
-        noarchive=False,
-        optimize=0,
-    )
-    pyz = PYZ(a.pure)
-    
-    exe = EXE(
-        pyz,
-        a.scripts,
-        a.binaries,
-        a.datas,
-        [],
-        name='youtube_downloader',
-        debug=False,
-        bootloader_ignore_signals=False,
-        strip=False,
-        upx=True,
-        upx_exclude=[],
-        runtime_tmpdir=None,
-        console=False,
-        disable_windowed_traceback=False,
-        argv_emulation=False,
-        target_arch=None,
-        codesign_identity=None,
-        entitlements_file=None,
-        icon=['resources\\icon.ico'],
-    )
-   ```
-
-5. Create the executable using the provided spec file:
-    ```bash
-    pyinstaller youtube_downloader.spec
-    ```
 
 ### Pre-built Executable
 
-If you don't want to compile the executable yourself, you can download the pre-built executable from [here](https://example.com/your-executable-download-link).
+You can download the pre-built executable from [here](https://github.com/yourusername/yourrepository/releases/download/v1.0/youtube_downloader.exe).
 
-## How to Use the Application
+### How to Use the Application
 
 1. Open the application.
 2. Enter the YouTube video URL in the provided input field.
@@ -118,4 +32,3 @@ If you want to contribute to this project, feel free to fork the repository and 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
