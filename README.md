@@ -52,9 +52,50 @@ If you prefer to distribute the application as an executable file, follow these 
 
 2. Place the `ffmpeg` executable in `ffmpeg/bin/ffmpeg.exe` and your icon file in `resources/icon.ico`.
 
-3. Create the executable using the provided spec file:
+3. Create custom `youtube_downloader.spec`. Example:
+   ```python
+    # -*- mode: python ; coding: utf-8 -*-
+    a = Analysis(
+        ['youtube_downloader.py'],
+        pathex=[],
+        binaries=[('ffmpeg/bin/ffmpeg.exe', '.')],
+        datas=[('resources/icon.ico', 'resources')],
+        hiddenimports=[],
+        hookspath=[],
+        hooksconfig={},
+        runtime_hooks=[],
+        excludes=[],
+        noarchive=False,
+        optimize=0,
+    )
+    pyz = PYZ(a.pure)
+    
+    exe = EXE(
+        pyz,
+        a.scripts,
+        a.binaries,
+        a.datas,
+        [],
+        name='youtube_downloader',
+        debug=False,
+        bootloader_ignore_signals=False,
+        strip=False,
+        upx=True,
+        upx_exclude=[],
+        runtime_tmpdir=None,
+        console=False,
+        disable_windowed_traceback=False,
+        argv_emulation=False,
+        target_arch=None,
+        codesign_identity=None,
+        entitlements_file=None,
+        icon=['resources\\icon.ico'],
+    )
+   ```
+
+5. Create the executable using the provided spec file:
     ```bash
-    pyinstaller --onefile youtube_downloader.spec
+    pyinstaller youtube_downloader.spec
     ```
 
 ### Pre-built Executable
