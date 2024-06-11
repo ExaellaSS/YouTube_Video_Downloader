@@ -8,18 +8,18 @@ It downloads both video and audio streams, combines them into a single file, and
 
 ~~## Requirements
 
-~~- Python 3.x
-~~- yt-dlp
-~~- FFmpeg
-~~- Tkinter (usually included with Python installations)
+- Python 3.x
+- yt-dlp
+- FFmpeg
+- Tkinter (usually included with Python installations)
 
-~~## Installation
+## Installation
 
-~~1. **Install Python**:
-   ~~Make sure you have Python installed on your computer. You can download it from [python.org](https://www.python.org/).
+1. **Install Python**:
+   Make sure you have Python installed on your computer. You can download it from [python.org](https://www.python.org/).
 
-~~2. **Install yt-dlp**:
-   ~~Open a terminal or command prompt and run:
+2. **Install yt-dlp**:
+   Open a terminal or command prompt and run:
    ```sh
    pip install yt-dlp
    ```
@@ -45,7 +45,7 @@ It downloads both video and audio streams, combines them into a single file, and
    - Once the download and combination are complete, a message will be displayed with the location of the saved video file.
 
 4. **Exit the Program**:
-   - Click the "Exit" button to close the program. Any temporary files created during the download process will be deleted.
+   - Click the "Exit" button to close the program. Any temporary files created during the download process will be deleted.~~
 
 ## Notes
 
