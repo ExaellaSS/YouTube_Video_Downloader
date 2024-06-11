@@ -20,7 +20,7 @@ YouTube Video Downloader is a simple desktop application that allows you to down
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/youtube-video-downloader.git
+    git clone https://github.com/ExaellaSS/YouTube_Video_Downloader.git
     cd youtube-video-downloader
     ```
 
