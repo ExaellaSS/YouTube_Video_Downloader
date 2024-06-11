@@ -60,5 +60,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 YouTubeVideoDownloader/
 │
 ├── youtube_downloader.py
+├── youtube_downloader.exe
 └── README.md
 ```
