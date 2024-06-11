@@ -1,14 +1,14 @@
 # YouTube_Video_Downloader
 Download video from YouTube without AD and Max Quality
 
-Конечно, вот пример файла `README.md` с инструкциями по использованию программы.
-
 ### README.md
 
 ```markdown
 # YouTube Video Downloader
 
-This is a simple YouTube video downloader built with Python and Tkinter. The program allows you to download videos from YouTube by providing a URL. It downloads both video and audio streams, combines them into a single file, and saves it to your computer.
+This is a simple YouTube video downloader built with Python and Tkinter. 
+The program allows you to download videos from YouTube by providing a URL. 
+It downloads both video and audio streams, combines them into a single file, and saves it to your computer.
 
 ## Requirements
 
@@ -32,7 +32,8 @@ This is a simple YouTube video downloader built with Python and Tkinter. The pro
 ```
 
 ## Usage
-```
+
+```markdown
 1. **Run the Program**:
    Save the Python script in a file, e.g., `youtube_downloader.py`. Open a terminal or command prompt, navigate to the directory where you saved the script, and run:
    ```sh
@@ -50,8 +51,10 @@ This is a simple YouTube video downloader built with Python and Tkinter. The pro
 4. **Exit the Program**:
    - Click the "Exit" button to close the program. Any temporary files created during the download process will be deleted.
 ```
+
 ## Notes
-```
+
+```markdown
 - Ensure that you have a stable internet connection while using the program.
 - If you encounter any issues, make sure that yt-dlp and FFmpeg are correctly installed and accessible from your terminal or command prompt.
 
