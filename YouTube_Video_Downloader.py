@@ -7,7 +7,7 @@ import threading
 import re
 import sys
 
-SAVE_PATH = os.path.join(os.path.expanduser("~"), "Downloads")
+SAVE_PATH = os.path.join(os.path.expanduser("~"), "Downloads") #My - D:\\Download
 threads = []
 video_file_path = ""
 audio_file_path = ""
