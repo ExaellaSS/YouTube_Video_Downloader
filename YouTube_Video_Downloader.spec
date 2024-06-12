@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['youtube_downloader.py'],
+    ['YouTube_Video_Downloader.py'],
     pathex=[],
     binaries=[('ffmpeg/bin/ffmpeg.exe', '.')],
     datas=[('resources/icon.ico', 'resources')],
@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='youtube_downloader',
+    name='YouTube_Video_Downloader',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
