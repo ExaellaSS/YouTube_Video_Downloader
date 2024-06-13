@@ -24,6 +24,23 @@ You can download the pre-built executable from [here](https://github.com/Exaella
 5. The application will display progress and status updates.
 6. Once the download and combination are complete, the output file will be saved to your Downloads folder.
 
+## Screenshot
+<br>
+<div align="center">
+  <img src="https://github.com/ExaellaSS/YouTube_Video_Downloader/assets/172437754/712c05c0-2ba5-43d3-b78e-c82592b72de5" alt="Menu">
+  <p>Menu</p>
+</div>
+<br>
+<div align="center">
+  <img src="https://github.com/ExaellaSS/YouTube_Video_Downloader/assets/172437754/efbf99d9-b78b-4af0-8c14-272fdbde2071" alt="Download">
+  <p>Download</p>
+</div>
+<br>
+<div align="center">
+  <img src="https://github.com/ExaellaSS/YouTube_Video_Downloader/assets/172437754/d3b1f727-a96b-4460-8440-de37dadd62b5" alt="Combined and Save">
+  <p>Combined and Save</p>
+</div>
+
 ## Contributing
 
 If you want to contribute to this project, feel free to fork the repository and submit pull requests. 
