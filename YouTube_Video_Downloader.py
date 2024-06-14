@@ -20,7 +20,7 @@ def clear_previous_files(video_file, audio_file):
 
 def progress_hook(d, progress_var, status_var, current_status):
     if d['status'] == 'downloading':
-        progress_var.set(float(d['_percent_str'].strip('%')))
+        progress_var.set((d["downloaded_bytes"]/d["total_bytes"]*100) if d["total_bytes"] is not None else 0.0)
     elif d['status'] == 'finished':
         progress_var.set(100)
         if current_status == 'video':
