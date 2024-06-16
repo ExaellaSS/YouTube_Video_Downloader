@@ -53,6 +53,24 @@ cd YouTube_Video_Downloader
 pip install -r requirements.txt
 ```
 
+## Building the Executable
+
+You can build the executable using PyInstaller with the provided spec file.
+
+1. Ensure you have PyInstaller installed:
+
+```sh
+pip install pyinstaller
+```
+
+2. Run PyInstaller with the spec file:
+
+```sh
+pyinstaller YouTube_Video_Downloader.spec
+```
+
+This will create a `dist` directory with the executable.
+
 ## Usage
 
 1. Run the `youtube_downloader.py` script:
