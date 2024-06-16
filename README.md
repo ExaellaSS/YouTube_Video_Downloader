@@ -17,6 +17,9 @@ This is a YouTube Video Downloader built with Python using the `yt_dlp` library 
 
 - Python 3.x
 - Required Python libraries:
+  - `yt-dlp==2024.5.27`
+  - `pillow==10.3.0`
+- Other Required:
   - `yt_dlp`
   - `tkinter`
   - `Pillow`
@@ -109,7 +112,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Contact
 
 For any questions or suggestions, please contact [ExaellaSS](https://github.com/ExaellaSS).
-
-```
-
-Feel free to adjust any sections or add more details as per your specific implementation and preferences.
