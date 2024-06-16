@@ -14,7 +14,6 @@ import uuid
 
 SAVE_PATH = os.path.join(os.path.expanduser("~"), "Downloads")
 stop_event = threading.Event()  # Event for stopping threads
-last_progress = 0  # Global variable to track last progress value
 real_download_started = False
 lock = threading.Lock()  # Lock for thread synchronization
 
@@ -26,30 +25,24 @@ def clear_previous_files(video_file, audio_file):
         os.remove(audio_file)
 
 def progress_hook(d, progress_var, status_var, current_status):
-    global last_progress, real_download_started
+    global real_download_started
     if d['status'] == 'downloading':
         # Calculate current progress based on different criteria
-        if 'fragment_index' in d and 'fragment_count' in d:
-            current_progress = (d['fragment_index'] / d['fragment_count']) * 100
-            real_download_started = True
-        elif 'downloaded_bytes' in d and 'total_bytes' in d and d['total_bytes'] is not None:
+        if not real_download_started:
+            progress_var.set(0.0)
+        current_progress = 0.0
+        if d.get('total_bytes') is not None:
             current_progress = (d['downloaded_bytes'] / d['total_bytes']) * 100
             real_download_started = True
-        elif 'downloaded_bytes' in d and 'total_bytes_estimate' in d and d['total_bytes_estimate'] is not None:
+        elif d.get('total_bytes_estimate') is not None:
             current_progress = (d['downloaded_bytes'] / d['total_bytes_estimate']) * 100
             real_download_started = True
-        else:
-            current_progress = last_progress
         
-        if real_download_started and current_progress > last_progress:
+        if real_download_started and current_progress > progress_var.get():
             progress_var.set(current_progress)
-            last_progress = current_progress
             status_var.set(f"Downloading {current_status}... {current_progress:.2f}%")
-            root.update_idletasks()
     elif d['status'] == 'finished':
-        if real_download_started:
-            progress_var.set(100)
-        last_progress = 0  # Reset progress after download completion
+        progress_var.set(100.0)
         real_download_started = False
         if current_status == 'video':
             status_var.set("Video downloaded. Wait...")
