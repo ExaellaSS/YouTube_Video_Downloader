@@ -1,4 +1,4 @@
-﻿import os
+import os
 import subprocess
 import yt_dlp as youtube_dl
 import tkinter as tk
@@ -12,13 +12,14 @@ import webbrowser
 import time
 import uuid
 
-SAVE_PATH = "D://Download"
-stop_event = threading.Event()  # Событие для остановки потоков
-last_progress = 0  # Глобальная переменная для отслеживания последнего значения прогресса
+SAVE_PATH = os.path.join(os.path.expanduser("~"), "Downloads")
+stop_event = threading.Event()  # Event for stopping threads
+last_progress = 0  # Global variable to track last progress value
 real_download_started = False
-lock = threading.Lock()  # Блокировка для синхронизации потоков
+lock = threading.Lock()  # Lock for thread synchronization
 
 def clear_previous_files(video_file, audio_file):
+    # Remove previous files if they exist
     if os.path.exists(video_file):
         os.remove(video_file)
     if os.path.exists(audio_file):
@@ -27,6 +28,7 @@ def clear_previous_files(video_file, audio_file):
 def progress_hook(d, progress_var, status_var, current_status):
     global last_progress, real_download_started
     if d['status'] == 'downloading':
+        # Calculate current progress based on different criteria
         if 'fragment_index' in d and 'fragment_count' in d:
             current_progress = (d['fragment_index'] / d['fragment_count']) * 100
             real_download_started = True
@@ -47,7 +49,7 @@ def progress_hook(d, progress_var, status_var, current_status):
     elif d['status'] == 'finished':
         if real_download_started:
             progress_var.set(100)
-        last_progress = 0  # Сброс значения после завершения скачивания
+        last_progress = 0  # Reset progress after download completion
         real_download_started = False
         if current_status == 'video':
             status_var.set("Video downloaded. Wait...")
@@ -62,14 +64,14 @@ def download_youtube_video(url, progress_var, status_var):
         status_var.set("Downloading video...")
         root.update_idletasks()
         progress_var.set(0)
-        progress_bar.pack(padx=10, pady=10, fill=tk.X)  # Показываем прогресс-бар
+        progress_bar.pack(padx=10, pady=10, fill=tk.X)  # Show progress bar
         
         # Generate unique file names
         unique_id = uuid.uuid4().hex
         video_filename = f'video_{unique_id}.%(ext)s'
         audio_filename = f'audio_{unique_id}.%(ext)s'
         
-        with lock:  # Синхронизируем доступ к загрузке видео и аудио
+        with lock:  # Synchronize video and audio downloads
             # Download video
             video_opts = {
                 'format': 'bestvideo',
@@ -91,7 +93,7 @@ def download_youtube_video(url, progress_var, status_var):
         root.update_idletasks()
         progress_var.set(0)
         
-        with lock:  # Синхронизируем доступ к загрузке видео и аудио
+        with lock:  # Synchronize video and audio downloads
             # Download audio
             audio_opts = {
                 'format': 'bestaudio',
@@ -125,6 +127,7 @@ def download_youtube_video(url, progress_var, status_var):
         return None, None, None
 
 def sanitize_filename(filename):
+    # Remove illegal characters from filename
     return re.sub(r'[\\/*?:"<>|]', "", filename)
 
 def get_unique_filename(path):
@@ -172,7 +175,7 @@ def combine_video_audio(video_path, audio_path, output_path, status_var):
             print(f"{os.linesep}Combined video saved to:{os.linesep}{output_path}")
         else:
             status_var.set("Error: Output file is empty or not created.")
-            print("Error: Output file is empty или не создан.")
+            print("Error: Output file is empty or not created.")
         
         if os.path.exists(video_path):
             os.remove(video_path)
@@ -285,7 +288,7 @@ def open_github():
 # Create the main window
 root = tk.Tk()
 root.title("YouTube Video Downloader")
-root.attributes('-topmost', True)  # Окно поверх остальных
+root.attributes('-topmost', True)  # Window on top of others
 
 # Set the icon for the window
 if hasattr(sys, '_MEIPASS'):
