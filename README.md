@@ -83,11 +83,13 @@ python youtube_downloader.py
 
 3. Click the "Paste URLs" button to paste URLs from your clipboard.
 
-4. Click the "Download" button to start downloading the videos and audio.
+4. Click the "Clear" button to remove links from the form.
 
-5. The progress bar and status label will show the current status of the download process.
+5. Click the "Download" button to start downloading the videos and audio.
 
-6. Once the download is complete, the video and audio files will be combined and saved to the specified download path.
+6. The progress bar and status label will show the current status of the download process.
+
+7. Once the download is complete, the video and audio files will be combined and saved to the specified download path.
 
 ## GUI Elements
 
