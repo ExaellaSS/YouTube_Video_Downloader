@@ -12,7 +12,7 @@ import webbrowser
 import time
 import uuid
 
-SAVE_PATH = os.path.join(os.path.expanduser("~"), "Downloads")
+SAVE_PATH = "D:\\Download"
 stop_event = threading.Event()  # Event for stopping threads
 last_progress = 0  # Global variable to track last progress value
 real_download_started = False
@@ -268,6 +268,9 @@ def on_paste_click():
     except tk.TclError:
         messagebox.showerror("Error", "No text found in clipboard")
 
+def on_clear_click():
+    url_entry.delete("1.0", tk.END)
+
 def center_window(window):
     window.update_idletasks()
     width = window.winfo_width()
@@ -309,17 +312,23 @@ url_entry = tk.Text(root, width=70, height=5)
 url_entry.pack(padx=10, pady=5)
 url_entry.focus_set()  # Set focus to the text entry field
 
-paste_button = tk.Button(root, text="Paste URLs", command=on_paste_click)
-paste_button.pack(padx=10, pady=5)
+button_frame_top = tk.Frame(root)
+button_frame_top.pack(padx=10, pady=5)
 
-button_frame = tk.Frame(root)
-button_frame.pack(padx=10, pady=5)
+paste_button = tk.Button(button_frame_top, text="Paste URLs", command=on_paste_click)
+paste_button.grid(row=0, column=0, padx=5)
 
-download_button = tk.Button(button_frame, text="Download", command=on_download_click)
-download_button.pack(side=tk.LEFT, padx=5)
+clear_button = tk.Button(button_frame_top, text="Clear", command=on_clear_click)
+clear_button.grid(row=0, column=1, padx=5)
 
-exit_button = tk.Button(button_frame, text="Exit", command=on_exit_click)
-exit_button.pack(side=tk.LEFT, padx=5)
+button_frame_bottom = tk.Frame(root)
+button_frame_bottom.pack(padx=10, pady=5)
+
+download_button = tk.Button(button_frame_bottom, text="Download", command=on_download_click)
+download_button.grid(row=0, column=0, padx=5)
+
+exit_button = tk.Button(button_frame_bottom, text="Exit", command=on_exit_click)
+exit_button.grid(row=0, column=1, padx=5)
 
 progress_var = tk.DoubleVar()
 progress_bar = ttk.Progressbar(root, variable=progress_var, maximum=100)
