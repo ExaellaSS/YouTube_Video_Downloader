@@ -12,7 +12,7 @@ import webbrowser
 import time
 import uuid
 
-SAVE_PATH = "D:\\Download"
+SAVE_PATH = os.path.join(os.path.expanduser("~"), "Downloads") #My - D:\\Download
 stop_event = threading.Event()  # Event for stopping threads
 last_progress = 0  # Global variable to track last progress value
 real_download_started = False
