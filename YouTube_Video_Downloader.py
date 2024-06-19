@@ -153,7 +153,7 @@ def combine_video_audio(video_path, audio_path, output_path, status_var):
         if hasattr(sys, '_MEIPASS'):
             ffmpeg_path = os.path.join(sys._MEIPASS, 'ffmpeg.exe')
         else:
-            ffmpeg_path = 'ffmpeg'
+            ffmpeg_path = os.path.join('ffmpeg', 'bin', 'ffmpeg.exe')
 
         command = [
             ffmpeg_path,
