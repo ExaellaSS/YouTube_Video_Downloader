@@ -5,6 +5,7 @@ import sys
 import uuid
 import time
 import webbrowser
+import subprocess
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
@@ -12,7 +13,8 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.progressbar import ProgressBar
 from kivy.core.clipboard import Clipboard
-from kivy.uix.scrollview import ScrollView
+from kivy.uix.popup import Popup
+from kivy.clock import Clock
 import yt_dlp as youtube_dl
 
 SAVE_PATH = "D:\\Download" #"/storage/emulated/0/Download"
@@ -87,13 +89,12 @@ class YouTubeDownloaderApp(App):
             else:
                 self.download_and_combine([url])
         if not stop_event.is_set():
-            self.status_label.text = "\nAll downloads completed."
-        self.progress_bar.value = 0
+            self.update_status_label("\nAll downloads completed.")
+        self.update_progress_bar(0)
 
     def download_youtube_playlist(self, url):
         try:
-            self.status_label.text = "\nFetching playlist info..."
-            self.root.update_idletasks()
+            self.update_status_label("\nFetching playlist info...")
 
             ydl_opts = {
                 'extract_flat': True,
@@ -107,32 +108,31 @@ class YouTubeDownloaderApp(App):
                 video_urls = [entry['url'] for entry in result['entries']]
                 self.download_and_combine(video_urls)
             else:
-                self.status_label.text = "Error: No videos found in playlist."
+                self.update_status_label("Error: No videos found in playlist.")
         except Exception as e:
             if not stop_event.is_set():
-                self.status_label.text = f"Error: {e}"
-            self.root.update_idletasks()
+                self.update_status_label(f"Error: {e}")
 
     def download_and_combine(self, urls):
         for url in urls:
             if stop_event.is_set():
                 break
-            self.progress_bar.value = 0
+            self.update_progress_bar(0)
             video_path, audio_path, video_title = self.download_youtube_video(url)
             if video_path and audio_path:
                 sanitized_title = self.sanitize_filename(video_title)
                 output_path = os.path.join(SAVE_PATH, f'{sanitized_title}.mp4')
                 self.combine_video_audio(video_path, audio_path, output_path)
         if not stop_event.is_set():
-            self.status_label.text = "\nAll downloads completed."
-        self.progress_bar.value = 0
+            self.update_status_label("\nAll downloads completed.")
+        self.update_progress_bar(0)
 
     def download_youtube_video(self, url):
         if stop_event.is_set():
             return None, None, None
         try:
-            self.status_label.text = "Downloading video..."
-            self.progress_bar.value = 0
+            self.update_status_label("Downloading video...")
+            self.update_progress_bar(0)
             
             unique_id = uuid.uuid4().hex
             video_filename = f'video_{unique_id}.%(ext)s'
@@ -154,8 +154,8 @@ class YouTubeDownloaderApp(App):
             if stop_event.is_set():
                 return None, None, None
             
-            self.status_label.text = "Downloading audio..."
-            self.progress_bar.value = 0
+            self.update_status_label("Downloading audio...")
+            self.update_progress_bar(0)
             
             with lock:
                 audio_opts = {
@@ -172,20 +172,20 @@ class YouTubeDownloaderApp(App):
             audio_file_path = os.path.join(SAVE_PATH, f'audio_{unique_id}.{audio_ext}')
             
             if not os.path.exists(video_file_path) or os.path.getsize(video_file_path) == 0:
-                self.status_label.text = "Error: Video file not found or is empty."
-                self.progress_bar.value = 0
+                self.update_status_label("Error: Video file not found or is empty.")
+                self.update_progress_bar(0)
                 return None, None, None
             
             if not os.path.exists(audio_file_path) or os.path.getsize(audio_file_path) == 0:
-                self.status_label.text = "Error: Audio file not found or is empty."
-                self.progress_bar.value = 0
+                self.update_status_label("Error: Audio file not found or is empty.")
+                self.update_progress_bar(0)
                 return None, None, None
             
             return video_file_path, audio_file_path, info_dict['title']
         except Exception as e:
             if not stop_event.is_set():
-                self.status_label.text = f"Error: {e}"
-            self.progress_bar.value = 0
+                self.update_status_label(f"Error: {e}")
+            self.update_progress_bar(0)
             return None, None, None
 
     def sanitize_filename(self, filename):
@@ -204,7 +204,7 @@ class YouTubeDownloaderApp(App):
         if stop_event.is_set():
             return
         try:
-            self.status_label.text = "\nCombining video and audio..."
+            self.update_status_label("\nCombining video and audio...")
             
             output_path = self.get_unique_filename(output_path)
             
@@ -223,10 +223,10 @@ class YouTubeDownloaderApp(App):
             print("FFmpeg stderr:", result.stderr)
 
             if os.path.exists(output_path) and os.path.getsize(output_path) > 0:
-                self.status_label.text = f"Combined video saved to: {output_path}"
+                self.update_status_label(f"Combined video saved to: {output_path}")
                 print(f"Combined video saved to: {output_path}")
             else:
-                self.status_label.text = "Error: Output file is empty or not created."
+                self.update_status_label("Error: Output file is empty or not created.")
                 print("Error: Output file is empty or not created.")
             
             if os.path.exists(video_path):
@@ -235,11 +235,11 @@ class YouTubeDownloaderApp(App):
                 os.remove(audio_path)
         except subprocess.CalledProcessError as e:
             if not stop_event.is_set():
-                self.status_label.text = f"Error: {e}"
+                self.update_status_label(f"Error: {e}")
             print("FFmpeg stdout:", e.stdout)
             print("FFmpeg stderr:", e.stderr)
         finally:
-            self.progress_bar.value = 0
+            self.update_progress_bar(0)
 
     def progress_hook(self, d):
         global last_progress, real_download_started
@@ -257,17 +257,21 @@ class YouTubeDownloaderApp(App):
                 current_progress = last_progress
             
             if real_download_started and current_progress > last_progress:
-                self.progress_bar.value = current_progress
+                self.update_progress_bar(current_progress)
                 last_progress = current_progress
-                self.status_label.text = f"Downloading... {current_progress:.2f}%"
+                self.update_status_label(f"Downloading... {current_progress:.2f}%")
         elif d['status'] == 'finished':
             if real_download_started:
-                self.progress_bar.value = 100
+                self.update_progress_bar(100)
             last_progress = 0
             real_download_started = False
-            self.status_label.text = "Download completed."
-        self.root.update_idletasks()
+            self.update_status_label("Download completed.")
+
+    def update_progress_bar(self, value):
+        Clock.schedule_once(lambda dt: setattr(self.progress_bar, 'value', value))
+
+    def update_status_label(self, text):
+        Clock.schedule_once(lambda dt: setattr(self.status_label, 'text', text))
 
 if __name__ == '__main__':
     YouTubeDownloaderApp().run()
-
