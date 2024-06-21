@@ -13,6 +13,27 @@ This is a YouTube Video Downloader built with Python using the `yt_dlp` library 
 - Supports pasting URLs from the clipboard
 - Social media links for easy access
 
+## ScreenShots
+<br>
+<div align="center">
+  <img src="https://github.com/ExaellaSS/YouTube_Video_Downloader/assets/172437754/9646841a-071f-4958-b429-8d2a2fb0627e" alt="Menu">
+  <p>Menu</p>
+</div>
+<br>
+<div align="center">
+  <img src="https://github.com/ExaellaSS/YouTube_Video_Downloader/assets/172437754/11fe2095-11f3-4a01-91d0-807a8f3978d7" alt="Download">
+  <p>Download</p>
+</div>
+<br>
+<div align="center">
+  <img src="https://github.com/ExaellaSS/YouTube_Video_Downloader/assets/172437754/7708cefb-e573-4257-9c27-f74fb60adac4" alt="Save">
+  <p>Save one or X video</p>
+</div>
+<div align="center">
+  <img src="https://github.com/ExaellaSS/YouTube_Video_Downloader/assets/172437754/58bd2665-1db8-4b7a-88e2-525cc48b66fa" alt="More detailed">
+  <p>More detailed</p>
+</div>
+
 ## Requirements
 
 - Python 3.x
